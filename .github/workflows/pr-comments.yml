@@ -1,3 +1,8 @@
+# Optimized by ci-cost (https://github.com/mariotavarez/ci-cost)
+# Applied 1 optimization:
+# - [MEDIUM] Add concurrency group to "pr-comments.yml"
+# Estimated savings: ~2 min/run
+#
 name: PR Comments
 
 on:
@@ -6,6 +11,10 @@ on:
     branches:
       - master
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   backend-tests-and-coverage:
     runs-on: ubuntu-latest
